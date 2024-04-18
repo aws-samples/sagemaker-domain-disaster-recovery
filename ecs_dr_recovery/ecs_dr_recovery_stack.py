@@ -120,6 +120,14 @@ class ECSTaskStack(Stack):
             ]
         )
         fargate_task_definition.add_to_execution_role_policy(ecs_exec_role_ecr_image_policy)
+        ecs_exec_role_ecr_batch_image_policy = iam.PolicyStatement(
+            effect=iam.Effect.ALLOW,
+            resources=["*"],
+            actions=[
+                "ecr:BatchGetImage"
+            ]
+        )
+        fargate_task_definition.add_to_execution_role_policy(ecs_exec_role_ecr_batch_image_policy)
         ecs_exec_role_cw_log_policy = iam.PolicyStatement(
             effect=iam.Effect.ALLOW,
             resources=["*"],
